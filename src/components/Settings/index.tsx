@@ -1,0 +1,72 @@
+import React, {useContext, useState, useEffect} from 'react';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {getLocaleValue} from '../../utils/Locale';
+import {AppContext} from '../../utils/context';
+import {RadioButton} from 'react-native-paper';
+import {setLanguage, getLanguage} from '../../utils/Locale';
+import RNRestart from 'react-native-restart';
+import styles from './styles';
+import {scale} from 'react-native-size-matters';
+import dark from '../../utils/Theme/dark';
+import light from '../../utils/Theme/light';
+
+const Settings = () => {
+  const {isDarkMode} = useContext(AppContext);
+
+  const [value, setValue] = useState('us');
+  const [myLocale, setMyLocale] = useState('us');
+
+  useEffect(() => {
+    const buildLocalization = async () => {
+      const _language = await getLanguage();
+      setValue(_language);
+      setMyLocale(_language);
+    };
+    buildLocalization();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <RadioButton.Group value={value} onValueChange={setValue}>
+        <View style={styles.item}>
+          <View>
+            <Text style={isDarkMode ? dark.text : light.text}>
+              {getLocaleValue('english')}
+            </Text>
+            <RadioButton value="us" />
+          </View>
+          <View style={{margin: scale(16)}} />
+          <View>
+            <Text style={isDarkMode ? dark.text : light.text}>
+              {getLocaleValue('german')}
+            </Text>
+            <RadioButton value="de" />
+          </View>
+        </View>
+      </RadioButton.Group>
+      <View style={{margin: scale(8)}} />
+      <View
+        style={{
+          ...styles.button,
+          ...(isDarkMode ? dark.btn : light.btn),
+        }}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            if (myLocale != value) {
+              setLanguage(value);
+              RNRestart.Restart();
+            }
+          }}>
+          <Text
+            style={{
+              color: isDarkMode ? dark.btnText.color : light.btnText.color,
+            }}>
+            {getLocaleValue('changeLanguage')}
+          </Text>
+        </TouchableWithoutFeedback>
+      </View>
+    </View>
+  );
+};
+
+export default Settings;

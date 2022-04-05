@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>682050436061-i6h9rkd1m4553quhi1cg4a8jpo954csl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.682050436061-i6h9rkd1m4553quhi1cg4a8jpo954csl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBh7K2NieQD5dswl0M6sY2ii69TxpJFTMc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>682050436061</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.VoisNewsApp</string>
+	<key>PROJECT_ID</key>
+	<string>voisnewsapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>voisnewsapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:682050436061:ios:96ce4c502fe3e7a7b55434</string>
+</dict>
+</plist>

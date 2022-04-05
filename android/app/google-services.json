@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "682050436061",
+    "project_id": "voisnewsapp",
+    "storage_bucket": "voisnewsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682050436061:android:1e2acaba668ea78cb55434",
+        "android_client_info": {
+          "package_name": "com.voisnewsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682050436061-rfe3lbgd95fab0ug4j5urqgf9pt4kr82.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.voisnewsapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "682050436061-v4v1sv61osbbiv7u8t8n08s32ieapqu2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD694RBSMM0ybr1J8zwwWku1zjndE_XmQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682050436061-v4v1sv61osbbiv7u8t8n08s32ieapqu2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "682050436061-i6h9rkd1m4553quhi1cg4a8jpo954csl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.VoisNewsApp",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
