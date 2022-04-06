@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {myNetwork, myLocalization} from '../utils/constants';
+import {myNetwork} from '../utils/constants';
 import {getLanguage} from '../utils/Locale';
 
 const axiosInstance = async () => {
