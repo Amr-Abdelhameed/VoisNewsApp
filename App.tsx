@@ -8,7 +8,7 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   getThemeMode().then(themeMode => {
-    if (themeMode != null) setIsDarkMode(themeMode != Themes.light);
+    if (themeMode) setIsDarkMode(themeMode != Themes.light);
   });
 
   return (

@@ -41,7 +41,7 @@ for IOS
 
 #### Get article by Id
 
-```http
+```https
   GET /v1/news/uuid/${uuid}
 ```
 

@@ -9,7 +9,7 @@ import light from '../../../utils/Theme/light';
 
 const SettingsStack = createNativeStackNavigator();
 
-export function SettingsRoot() {
+export default function SettingsRoot() {
   const {isDarkMode} = useContext(AppContext);
 
   return (

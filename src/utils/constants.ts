@@ -1,4 +1,8 @@
 export const myNavigation = Object.freeze({
+  splash: {
+    stack: 'splashStack',
+    name: 'splash',
+  },
   main: {
     stack: 'mainStack',
     news: {

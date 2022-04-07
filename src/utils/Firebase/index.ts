@@ -11,7 +11,7 @@ export const getUIdByDynamicLink = async () => {
 
 export async function buildShortLink(uuid: string) {
   const link = await dynamicLinks().buildShortLink({
-    link: `https://www.thenewsapi.com/?uuid=${uuid}`,
+    link: `https://www.thenewsapi.com?uuid=${uuid}`,
     ios: {
       bundleId: 'org.reactjs.native.example.VoisNewsApp',
       appStoreId: '123456789',

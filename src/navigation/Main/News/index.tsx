@@ -10,7 +10,7 @@ import light from '../../../utils/Theme/light';
 
 const NewsStack = createNativeStackNavigator();
 
-export function NewsRoot() {
+export default function NewsRoot() {
   const {isDarkMode} = useContext(AppContext);
 
   return (

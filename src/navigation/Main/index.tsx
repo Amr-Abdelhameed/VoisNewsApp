@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NewsRoot} from './News';
-import {SettingsRoot} from './Settings';
+import NewsRoot from './News';
+import SettingsRoot from './Settings';
 import {myNavigation} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getLocaleValue} from '../../utils/Locale';
@@ -11,7 +11,7 @@ import light from '../../utils/Theme/light';
 
 const BottomTabNav = createBottomTabNavigator();
 
-const BottomNavigation = () => {
+export default function BottomNavigationRoot() {
   const {isDarkMode} = useContext(AppContext);
 
   return (
@@ -57,6 +57,4 @@ const BottomNavigation = () => {
       />
     </BottomTabNav.Navigator>
   );
-};
-
-export default BottomNavigation;
+}
