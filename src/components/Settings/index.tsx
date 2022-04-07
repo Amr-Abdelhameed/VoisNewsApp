@@ -1,9 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import {getLocaleValue} from '../../utils/Locale';
 import {AppContext} from '../../utils/context';
 import {RadioButton} from 'react-native-paper';
-import {setLanguage, getLanguage} from '../../utils/Locale';
+import {setLanguage} from '../../utils/Locale';
 import RNRestart from 'react-native-restart';
 import styles from './styles';
 import {scale} from 'react-native-size-matters';
@@ -12,19 +12,9 @@ import light from '../../utils/Theme/light';
 import DarkSwitch from '../DarkSwitch';
 
 const Settings = () => {
-  const {isDarkMode} = useContext(AppContext);
+  const {isDarkMode, localization} = useContext(AppContext);
 
-  const [value, setValue] = useState('us');
-  const [myLocale, setMyLocale] = useState('us');
-
-  useEffect(() => {
-    const buildLocalization = async () => {
-      const _language = await getLanguage();
-      setValue(_language);
-      setMyLocale(_language);
-    };
-    buildLocalization();
-  }, []);
+  const [value, setValue] = useState(localization);
 
   return (
     <View style={styles.container}>
@@ -72,7 +62,7 @@ const Settings = () => {
         }}>
         <TouchableWithoutFeedback
           onPress={() => {
-            if (myLocale != value) {
+            if (localization != value) {
               setLanguage(value);
               RNRestart.Restart();
             }

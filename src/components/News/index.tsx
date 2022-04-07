@@ -31,14 +31,6 @@ const News = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    async function fireDynamicLink() {
-      const uId = await getUIdByDynamicLink();
-      if (uId) navigation.navigate(myNavigation.main.news.details, {uuid: uId});
-    }
-    fireDynamicLink();
-  }, []);
-
-  useEffect(() => {
     if (response) setFilteredList(response.data);
   }, [response]);
 
@@ -48,6 +40,14 @@ const News = ({navigation}) => {
       setFilteredList(_filteredNews);
     }
   }, [searchQuery]);
+
+  useEffect(() => {
+    async function fireDynamicLink() {
+      const uId = await getUIdByDynamicLink();
+      if (uId) navigation.navigate(myNavigation.main.news.details, {uuid: uId});
+    }
+    fireDynamicLink();
+  }, []);
 
   const renderItem = ({item}) => (
     <NewsItem

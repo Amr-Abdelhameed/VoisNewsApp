@@ -3,16 +3,9 @@ import {View} from 'react-native';
 import styles from './styles';
 import LottieView from 'lottie-react-native';
 import {myNavigation} from '../../utils/constants';
-import {setLocale, getLanguage} from '../../utils/Locale';
 
 const Splash = ({navigation}) => {
   const [animationLoaded, setAnimationLoaded] = useState(false);
-
-  useEffect(() => {
-    getLanguage().then(language => {
-      if (language) setLocale(language);
-    });
-  }, []);
 
   useEffect(() => {
     if (animationLoaded)
