@@ -9,4 +9,5 @@ export default {
   source: 'Quelle',
   changeLanguage: 'Sprache ändern',
   share: 'Teilen',
+  darkMode: 'dunkler Modus',
 };

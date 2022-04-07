@@ -4,9 +4,9 @@ A simple app to hit the news API and show a list of articles, that shows details
 
 ## Demo
 
-[IOS](https://drive.google.com/file/d/1th4nKi6wYVo_fMYxyPsZKmEkCtKAZO-6/view?usp=sharing)
+[IOS](https://drive.google.com/drive/folders/1kqSd6WjvM5-4POXduIYGvIZxIgb6vTb-?usp=sharing)
 
-[Android](https://drive.google.com/file/d/1nRQruNNWkeUb77WIbub74lPBttrIc7yg/view?usp=sharing)
+[Android](https://drive.google.com/drive/folders/1cF2AKTnscDnGZ70A9E2r1Qi5dVonWWV_?usp=sharing)
 
 ## Environment Setup
 

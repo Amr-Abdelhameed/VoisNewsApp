@@ -10,9 +10,16 @@ export default StyleSheet.create({
   item: {
     flexDirection: 'row',
   },
+  line: {
+    width: scale(200),
+    height: 1,
+  },
   button: {
     padding: scale(12),
     borderRadius: scale(4),
     alignItems: 'center',
+  },
+  text: {
+    marginTop: scale(6),
   },
 });

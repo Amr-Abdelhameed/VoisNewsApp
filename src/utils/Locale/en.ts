@@ -9,4 +9,5 @@ export default {
   source: 'Source',
   changeLanguage: 'Change Language',
   share: 'Share',
+  darkMode: 'Dark mode',
 };

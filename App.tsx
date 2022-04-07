@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Navigation from './src/navigation';
 import {AppContext} from './src/utils/context';
-import DarkSwitch from './src/components/DarkSwitch';
 import {getThemeMode, Themes} from './src/utils/Theme';
 
 const App = () => {
@@ -14,7 +13,6 @@ const App = () => {
   return (
     <AppContext.Provider value={{isDarkMode, setIsDarkMode}}>
       <Navigation />
-      <DarkSwitch />
     </AppContext.Provider>
   );
 };
