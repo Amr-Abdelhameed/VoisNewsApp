@@ -1,17 +1,12 @@
 import axios from 'axios';
 import {myNetwork} from '../utils/constants';
-import {getLanguage} from '../utils/Locale';
+import {getLocaleValue} from '../preferences/Locale';
 
-const axiosInstance = async () => {
-  let _language = await getLanguage();
-
-  return axios.create({
-    baseURL: myNetwork.baseURL,
-    params: {
-      api_token: myNetwork.apiToken,
-      locale: _language,
-    },
-  });
-};
-
+const axiosInstance = axios.create({
+  baseURL: myNetwork.baseURL,
+  params: {
+    api_token: myNetwork.apiToken,
+    locale: getLocaleValue('locale'),
+  },
+});
 export default axiosInstance;

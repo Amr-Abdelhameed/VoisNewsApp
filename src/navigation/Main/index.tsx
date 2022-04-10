@@ -4,10 +4,10 @@ import NewsRoot from './News';
 import SettingsRoot from './Settings';
 import {myNavigation} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {getLocaleValue} from '../../utils/Locale';
-import {AppContext} from '../../utils/context';
-import dark from '../../utils/Theme/dark';
-import light from '../../utils/Theme/light';
+import {getLocaleValue} from '../../preferences/Locale';
+import AppContext from '../../context/AppContext';
+import dark from '../../preferences/Theme/dark';
+import light from '../../preferences/Theme/light';
 
 const BottomTabNav = createBottomTabNavigator();
 

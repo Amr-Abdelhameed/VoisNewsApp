@@ -1,6 +1,6 @@
 # News App
 
-A simple app to hit the news API and show a list of articles, that shows details when items on the list are tapped (a typical master/detail app), also user able to change theme (dark - light) and language (english - german) in application that implements (ContextAPI, Navigation, Bottom Navigation, Firebase (Dynamic Links), Axios, Custom Hooks, Repository, Localization).
+A simple app to hit the news API and show a list of articles, that shows details when items on the list are tapped (a typical master/detail app), also user able to change theme (dark - light) and language (english - german) in application that implements (ContextAPI, Navigation, Bottom Navigation, Firebase (Dynamic Links), Axios, Lottie Animation, Localization, Custom Hooks, Repository, Pagination).
 
 ## Demo
 
@@ -38,6 +38,7 @@ for IOS
 | :---------- | :------- | :---------------------------------------- |
 | `api_token` | `string` | **Required**. Your API Token              |
 | `locale`    | `string` | **Optional**. Your Locale (us, de ...etc) |
+| `page`      | `int`    | **Optional**. page = :number              |
 
 #### Get article by Id
 

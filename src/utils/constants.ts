@@ -19,7 +19,7 @@ export const myNavigation = Object.freeze({
 
 export const myNetwork = Object.freeze({
   baseURL: 'https://api.thenewsapi.com',
-  apiToken: '3Dy1XSeLrpzdNMfL9k64GJI00RTpc6EE1SzQoHCl',
+  apiToken: 'GHJ4Hp0v60vWPgfEozfaKzPLn7aBAQpO2ZuUsmWo',
   routes: {
     top: 'v1/news/top',
     byId: 'v1/news/uuid',

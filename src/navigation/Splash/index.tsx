@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Splash from '../../components/Splash';
+import Splash from '../../screens/Splash';
 import {myNavigation} from '../../utils/constants';
-import {AppContext} from '../../utils/context';
-import dark from '../../utils/Theme/dark';
-import light from '../../utils/Theme/light';
+import AppContext from '../../context/AppContext';
+import dark from '../../preferences/Theme/dark';
+import light from '../../preferences/Theme/light';
 
 const SplashStack = createNativeStackNavigator();
 

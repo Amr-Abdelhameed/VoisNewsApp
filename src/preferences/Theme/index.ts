@@ -1,5 +1,5 @@
 import {setData, getData} from '../LocalStorage';
-import {myStorage} from '../constants';
+import {myStorage} from '../../utils/constants';
 
 export enum Themes {
   dark = 'dark',

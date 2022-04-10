@@ -2,7 +2,7 @@ import {setData, getData} from '../LocalStorage';
 import I18n from 'react-native-i18n';
 import en from './en';
 import de from './de';
-import {myLocalization, myStorage} from '../constants';
+import {myLocalization, myStorage} from '../../utils/constants';
 
 I18n.fallbacks = true;
 I18n.translations = {en, de};

@@ -9,12 +9,12 @@ import {
   Share,
 } from 'react-native';
 import styles from './styles';
-import {AppContext} from '../../utils/context';
-import {getLocaleValue} from '../../utils/Locale';
+import {getLocaleValue} from '../../../preferences/Locale';
 import {useGetArticleById} from './NewsDetailsRepository';
-import dark from '../../utils/Theme/dark';
-import light from '../../utils/Theme/light';
-import {buildShortLink} from '../../utils/Firebase';
+import AppContext from '../../../context/AppContext';
+import dark from '../../../preferences/Theme/dark';
+import light from '../../../preferences/Theme/light';
+import {buildShortLink} from '../../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
 
 const NewsDetails = ({route}) => {
@@ -30,28 +30,12 @@ const NewsDetails = ({route}) => {
     async function buildDynamicLink() {
       const _link = await buildShortLink(uuid);
       setDynamicLink(_link);
-      // console.log(_link);
     }
     buildDynamicLink();
   }, []);
 
   const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message: dynamicLink,
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
+    await Share.share({message: dynamicLink});
   };
 
   return (

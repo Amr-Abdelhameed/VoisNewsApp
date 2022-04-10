@@ -1,4 +1,5 @@
 export default {
+  locale: 'de',
   news: 'Neuigkeiten',
   details: 'Artikeldetails',
   settings: 'Einstellungen',

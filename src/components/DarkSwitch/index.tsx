@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Switch} from 'react-native';
-import {AppContext} from '../../utils/context';
-import {setThemeMode, Themes} from '../../utils/Theme';
+import AppContext from '../../context/AppContext';
+import {setThemeMode, Themes} from '../../preferences/Theme';
 
 const DarkSwitch = () => {
   const {isDarkMode, setIsDarkMode} = useContext(AppContext);

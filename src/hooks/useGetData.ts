@@ -1,18 +1,28 @@
 import {useState, useEffect, useCallback} from 'react';
 import axiosInstance from '../services/axiosInstant';
+import {myNetwork} from '../utils/constants';
 
 export function useGetData(route: string) {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({isOccurred: false, message: ''});
-  const [refetchCount, setRefetchCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   const getData = useCallback(
     async function () {
       setLoading(true);
       try {
-        const _response = (await (await axiosInstance()).get(route)).data;
-        setResponse(_response);
+        const _response = (
+          await axiosInstance.get(route, {params: {page: page}})
+        ).data;
+        if (route == myNetwork.routes.top)
+          if (page == 1) setResponse(_response.data);
+          else setResponse(response.concat(_response.data));
+        else setResponse(_response);
+
+        // if (route == myNetwork.routes.top) setResponse(_response.data);
+        // else setResponse(_response);
+
         setError({isOccurred: false, message: ''});
       } catch (_error) {
         setError({isOccurred: true, message: _error.message});
@@ -21,16 +31,20 @@ export function useGetData(route: string) {
         setLoading(false);
       }
     },
-    [route],
+    [page],
   );
 
   useEffect(() => {
     getData();
-  }, [getData, refetchCount]);
+  }, [getData]);
 
   function refetch() {
-    setRefetchCount(prev => prev + 1);
+    setPage(1);
   }
 
-  return [response, loading, error, refetch];
+  function loadMore() {
+    setPage(page + 1);
+  }
+
+  return [response, loading, error, refetch, loadMore];
 }

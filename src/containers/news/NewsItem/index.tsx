@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {View, Image, Text, TouchableWithoutFeedback} from 'react-native';
 import styles from './styles';
-import {AppContext} from '../../utils/context';
-import dark from '../../utils/Theme/dark';
-import light from '../../utils/Theme/light';
+import AppContext from '../../../context/AppContext';
+import dark from '../../../preferences/Theme/dark';
+import light from '../../../preferences/Theme/light';
 
 const NewsItem = ({item, onPress}) => {
   const {isDarkMode} = useContext(AppContext);

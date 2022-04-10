@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import News from '../../../components/News';
-import NewsDetails from '../../../components/NewsDetails';
+import News from '../../../containers/news/News';
+import NewsDetails from '../../../containers/news/NewsDetails';
 import {myNavigation} from '../../../utils/constants';
-import {getLocaleValue} from '../../../utils/Locale';
-import {AppContext} from '../../../utils/context';
-import dark from '../../../utils/Theme/dark';
-import light from '../../../utils/Theme/light';
+import {getLocaleValue} from '../../../preferences/Locale';
+import AppContext from '../../../context/AppContext';
+import dark from '../../../preferences/Theme/dark';
+import light from '../../../preferences/Theme/light';
 
 const NewsStack = createNativeStackNavigator();
 
