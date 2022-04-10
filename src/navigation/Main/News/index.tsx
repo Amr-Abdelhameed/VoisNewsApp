@@ -2,39 +2,34 @@ import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import News from '../../../containers/news/News';
 import NewsDetails from '../../../containers/news/NewsDetails';
-import {myNavigation} from '../../../utils/constants';
+import {routes} from '../../../utils/constants';
 import {getLocaleValue} from '../../../preferences/Locale';
 import AppContext from '../../../context/AppContext';
-import dark from '../../../preferences/Theme/dark';
-import light from '../../../preferences/Theme/light';
+import * as Theme from '../../../preferences/Theme';
 
 const NewsStack = createNativeStackNavigator();
 
 export default function NewsRoot() {
-  const {isDarkMode} = useContext(AppContext);
+  const {themeMode} = useContext(AppContext);
 
   return (
     <NewsStack.Navigator
       screenOptions={() => ({
         headerStyle: {
-          backgroundColor: isDarkMode
-            ? dark.background.backgroundColor
-            : light.background.backgroundColor,
+          backgroundColor: Theme.background(themeMode).backgroundColor,
         },
         contentStyle: {
-          backgroundColor: isDarkMode
-            ? dark.background.backgroundColor
-            : light.background.backgroundColor,
+          backgroundColor: Theme.background(themeMode).backgroundColor,
         },
-        headerTintColor: isDarkMode ? dark.text.color : light.text.color,
+        headerTintColor: Theme.text(themeMode).color,
       })}>
       <NewsStack.Screen
-        name={myNavigation.main.news.name}
+        name={routes.main.news.name}
         component={News}
         options={{title: getLocaleValue('news')}}
       />
       <NewsStack.Screen
-        name={myNavigation.main.news.details}
+        name={routes.main.news.details}
         component={NewsDetails}
         options={{title: getLocaleValue('details')}}
       />

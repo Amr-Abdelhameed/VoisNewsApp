@@ -6,12 +6,11 @@ import {RadioButton} from 'react-native-paper';
 import RNRestart from 'react-native-restart';
 import styles from './styles';
 import {scale} from 'react-native-size-matters';
-import dark from '../../preferences/Theme/dark';
-import light from '../../preferences/Theme/light';
+import * as Theme from '../../preferences/Theme';
 import DarkSwitch from '../../components/DarkSwitch';
 
 const Settings = () => {
-  const {isDarkMode} = useContext(AppContext);
+  const {themeMode} = useContext(AppContext);
 
   const [value, setValue] = useState(getLocaleValue('locale'));
 
@@ -21,7 +20,7 @@ const Settings = () => {
         <Text
           style={{
             ...styles.text,
-            ...(isDarkMode ? dark.text : light.text),
+            ...Theme.text(themeMode),
           }}>
           {getLocaleValue('darkMode')}
         </Text>
@@ -32,21 +31,21 @@ const Settings = () => {
         <View
           style={{
             ...styles.line,
-            ...(isDarkMode ? dark.btn : light.btn),
+            ...Theme.btn(themeMode),
           }}
         />
       </View>
       <RadioButton.Group value={value} onValueChange={setValue}>
         <View style={styles.item}>
           <View>
-            <Text style={isDarkMode ? dark.text : light.text}>
+            <Text style={Theme.text(themeMode)}>
               {getLocaleValue('english')}
             </Text>
             <RadioButton value="us" />
           </View>
           <View style={{marginHorizontal: scale(16)}} />
           <View>
-            <Text style={isDarkMode ? dark.text : light.text}>
+            <Text style={Theme.text(themeMode)}>
               {getLocaleValue('german')}
             </Text>
             <RadioButton value="de" />
@@ -57,7 +56,7 @@ const Settings = () => {
       <View
         style={{
           ...styles.button,
-          ...(isDarkMode ? dark.btn : light.btn),
+          ...Theme.btn(themeMode),
         }}>
         <TouchableWithoutFeedback
           onPress={() => {
@@ -68,7 +67,7 @@ const Settings = () => {
           }}>
           <Text
             style={{
-              color: isDarkMode ? dark.btnText.color : light.btnText.color,
+              color: Theme.btnText(themeMode).color,
             }}>
             {getLocaleValue('changeLanguage')}
           </Text>

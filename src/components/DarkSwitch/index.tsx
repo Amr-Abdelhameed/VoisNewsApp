@@ -1,20 +1,24 @@
 import React, {useContext} from 'react';
 import {Switch} from 'react-native';
 import AppContext from '../../context/AppContext';
-import {setThemeMode, Themes} from '../../preferences/Theme';
+import {setTheme, Themes} from '../../preferences/Theme';
+import colors from './colors';
 
 const DarkSwitch = () => {
-  const {isDarkMode, setIsDarkMode} = useContext(AppContext);
+  const {themeMode, setThemeMode} = useContext(AppContext);
+
+  const currentTheme = (theme: string) =>
+    theme == Themes.light ? Themes.dark : Themes.light;
 
   const toggleSwitch = () => {
-    setThemeMode(isDarkMode ? Themes.light : Themes.dark);
-    setIsDarkMode((previousState: boolean) => !previousState);
+    setTheme(currentTheme(themeMode));
+    setThemeMode((previousState: string) => currentTheme(previousState));
   };
 
   return (
     <Switch
-      trackColor={{false: '#767577', true: '#81b0ff'}}
-      value={isDarkMode}
+      trackColor={{false: colors[0], true: colors[1]}}
+      value={themeMode != Themes.light}
       onValueChange={toggleSwitch}
     />
   );

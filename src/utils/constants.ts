@@ -1,4 +1,4 @@
-export const myNavigation = Object.freeze({
+export const routes = Object.freeze({
   splash: {
     stack: 'splashStack',
     name: 'splash',
@@ -19,7 +19,7 @@ export const myNavigation = Object.freeze({
 
 export const myNetwork = Object.freeze({
   baseURL: 'https://api.thenewsapi.com',
-  apiToken: 'GHJ4Hp0v60vWPgfEozfaKzPLn7aBAQpO2ZuUsmWo',
+  apiToken: 'T1LuHqqpGB6oQIFB32JdvX2ZpIpFaYRlLuB3ut6B',
   routes: {
     top: 'v1/news/top',
     byId: 'v1/news/uuid',

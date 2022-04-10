@@ -1,20 +1,18 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import Navigation from './navigation';
 import AppContext from './context/AppContext';
-import {getThemeMode, Themes} from './preferences/Theme';
+import {getTheme, Themes} from './preferences/Theme';
 import {setLocale, getLanguage} from './preferences/Locale';
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [themeMode, setThemeMode] = useState<string>(Themes.light);
 
-  const appConfiguration = useCallback(function () {
-    getThemeMode().then(themeMode => {
-      if (themeMode) setIsDarkMode(themeMode != Themes.light);
-    });
+  const appConfiguration = useCallback(async function () {
+    const theme = await getTheme();
+    theme && setThemeMode(theme);
 
-    getLanguage().then(language => {
-      if (language) setLocale(language);
-    });
+    const lang = await getLanguage();
+    lang && setLocale(lang);
   }, []);
 
   useEffect(() => {
@@ -22,7 +20,7 @@ const App = () => {
   }, [appConfiguration]);
 
   return (
-    <AppContext.Provider value={{isDarkMode, setIsDarkMode}}>
+    <AppContext.Provider value={{themeMode, setThemeMode}}>
       <Navigation />
     </AppContext.Provider>
   );

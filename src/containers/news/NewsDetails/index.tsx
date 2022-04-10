@@ -10,21 +10,23 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {getLocaleValue} from '../../../preferences/Locale';
-import {useGetArticleById} from './NewsDetailsRepository';
 import AppContext from '../../../context/AppContext';
-import dark from '../../../preferences/Theme/dark';
-import light from '../../../preferences/Theme/light';
+import * as Theme from '../../../preferences/Theme';
 import {buildShortLink} from '../../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
+import {myNetwork} from '../../../utils/constants';
+import {useGetData} from '../../../hooks/useGetData';
 
 const NewsDetails = ({route}) => {
   const {uuid} = route.params;
 
-  const {isDarkMode} = useContext(AppContext);
+  const {themeMode} = useContext(AppContext);
 
   const [dynamicLink, setDynamicLink] = useState('');
 
-  const [response, loading, error, _] = useGetArticleById(uuid);
+  const [response, loading, error, _] = useGetData(
+    `${myNetwork.routes.byId}/${uuid}`,
+  );
 
   useEffect(() => {
     async function buildDynamicLink() {
@@ -52,21 +54,21 @@ const NewsDetails = ({route}) => {
             <Text
               style={{
                 ...styles.text,
-                ...(isDarkMode ? dark.text : light.text),
+                ...Theme.text(themeMode),
               }}>
               {response.title}
             </Text>
             <Text
               style={{
                 ...styles.text,
-                ...(isDarkMode ? dark.text : light.text),
+                ...Theme.text(themeMode),
               }}>
               {response.description}
             </Text>
             <Text
               style={{
                 ...styles.text,
-                ...(isDarkMode ? dark.text : light.text),
+                ...Theme.text(themeMode),
               }}>
               {getLocaleValue('publishedAt')}:{' '}
               {response.published_at.substring(0, 10)}
@@ -74,7 +76,7 @@ const NewsDetails = ({route}) => {
             <Text
               style={{
                 ...styles.text,
-                ...(isDarkMode ? dark.text : light.text),
+                ...Theme.text(themeMode),
               }}>
               {getLocaleValue('source')}: {response.source}
             </Text>
@@ -87,14 +89,12 @@ const NewsDetails = ({route}) => {
             <View
               style={{
                 ...styles.button,
-                ...(isDarkMode ? dark.btn : light.btn),
+                ...Theme.btn(themeMode),
               }}>
               <TouchableWithoutFeedback onPress={onShare}>
                 <Text
                   style={{
-                    color: isDarkMode
-                      ? dark.btnText.color
-                      : light.btnText.color,
+                    color: Theme.btnText(themeMode).color,
                   }}>
                   {getLocaleValue('share')}
                 </Text>
@@ -107,7 +107,7 @@ const NewsDetails = ({route}) => {
         <Text
           style={{
             ...styles.text,
-            ...(isDarkMode ? dark.text : light.text),
+            ...Theme.text(themeMode),
           }}>
           {error.message}
         </Text>

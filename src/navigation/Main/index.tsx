@@ -2,17 +2,16 @@ import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import NewsRoot from './News';
 import SettingsRoot from './Settings';
-import {myNavigation} from '../../utils/constants';
+import {routes} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getLocaleValue} from '../../preferences/Locale';
 import AppContext from '../../context/AppContext';
-import dark from '../../preferences/Theme/dark';
-import light from '../../preferences/Theme/light';
+import * as Theme from '../../preferences/Theme';
 
 const BottomTabNav = createBottomTabNavigator();
 
 export default function BottomNavigationRoot() {
-  const {isDarkMode} = useContext(AppContext);
+  const {themeMode} = useContext(AppContext);
 
   return (
     <BottomTabNav.Navigator
@@ -20,19 +19,13 @@ export default function BottomNavigationRoot() {
         headerShown: false,
         tabBarStyle: {
           borderTopWidth: 0,
-          backgroundColor: isDarkMode
-            ? dark.background.backgroundColor
-            : light.background.backgroundColor,
+          backgroundColor: Theme.background(themeMode).backgroundColor,
         },
-        tabBarActiveTintColor: isDarkMode
-          ? dark.tabBarActiveTintColor
-          : light.tabBarActiveTintColor,
-        tabBarInactiveTintColor: isDarkMode
-          ? dark.tabBarInactiveTintColor
-          : light.tabBarInactiveTintColor,
+        tabBarActiveTintColor: Theme.tabBarActiveTintColor(themeMode),
+        tabBarInactiveTintColor: Theme.tabBarInactiveTintColor(themeMode),
       })}>
       <BottomTabNav.Screen
-        name={myNavigation.main.news.stack}
+        name={routes.main.news.stack}
         component={NewsRoot}
         options={{
           tabBarLabel: getLocaleValue('news'),
@@ -42,7 +35,7 @@ export default function BottomNavigationRoot() {
         }}
       />
       <BottomTabNav.Screen
-        name={myNavigation.main.settings.stack}
+        name={routes.main.settings.stack}
         component={SettingsRoot}
         options={{
           tabBarLabel: getLocaleValue('settings'),

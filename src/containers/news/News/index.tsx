@@ -1,31 +1,32 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {FlatList, RefreshControl, Text, ActivityIndicator} from 'react-native';
 import {Searchbar} from 'react-native-paper';
-import {useGetNews} from './NewsRepository';
 import NewsItem from '../NewsItem';
-import {myNavigation} from '../../../utils/constants';
+import {routes, myNetwork} from '../../../utils/constants';
 import styles from './styles';
 import {getLocaleValue} from '../../../preferences/Locale';
 import AppContext from '../../../context/AppContext';
-import dark from '../../../preferences/Theme/dark';
-import light from '../../../preferences/Theme/light';
+import * as Theme from '../../../preferences/Theme';
 import {wait} from '../../../utils/helper';
-import {getFilteredNews} from './NewsController';
+import {getFilteredNews} from './NewsHelper';
 import {getUIdByDynamicLink} from '../../../utils/Firebase';
+import {useGetData} from '../../../hooks/useGetData';
 
 const News = ({navigation}) => {
-  const {isDarkMode} = useContext(AppContext);
+  const {themeMode} = useContext(AppContext);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredList, setFilteredList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const [response, loading, error, refetch, loadMore] = useGetNews();
+  const [response, loading, error, refetch, loadMore] = useGetData(
+    myNetwork.routes.top,
+  );
 
   useEffect(() => {
     async function fireDynamicLink() {
       const uId = await getUIdByDynamicLink();
-      if (uId) navigation.navigate(myNavigation.main.news.details, {uuid: uId});
+      if (uId) navigation.navigate(routes.main.news.details, {uuid: uId});
     }
     fireDynamicLink();
   }, []);
@@ -42,7 +43,7 @@ const News = ({navigation}) => {
     <NewsItem
       item={item}
       onPress={() => {
-        navigation.navigate(myNavigation.main.news.details, {uuid: item.uuid});
+        navigation.navigate(routes.main.news.details, {uuid: item.uuid});
       }}
     />
   );
@@ -63,17 +64,13 @@ const News = ({navigation}) => {
   return (
     <>
       <Searchbar
-        iconColor={
-          isDarkMode ? dark.placeHolderIconColor : light.placeHolderIconColor
-        }
+        iconColor={Theme.placeHolderIconColor(themeMode)}
         placeholder={getLocaleValue('search')}
-        placeholderTextColor={
-          isDarkMode ? dark.placeHolderColor : light.placeHolderColor
-        }
+        placeholderTextColor={Theme.placeHolderColor(themeMode)}
         value={searchQuery}
         onChangeText={setSearchQuery}
-        inputStyle={isDarkMode ? dark.text : light.text}
-        style={isDarkMode ? dark.background : light.background}
+        inputStyle={Theme.text(themeMode)}
+        style={Theme.background(themeMode)}
       />
       <FlatList
         data={filteredList}
@@ -87,8 +84,7 @@ const News = ({navigation}) => {
       />
       {loading && <ActivityIndicator />}
       {error.isOccurred && (
-        <Text
-          style={{...styles.error, ...(isDarkMode ? dark.text : light.text)}}>
+        <Text style={{...styles.error, ...Theme.text(themeMode)}}>
           {error.message}
         </Text>
       )}
