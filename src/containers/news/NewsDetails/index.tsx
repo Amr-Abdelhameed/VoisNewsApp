@@ -24,9 +24,8 @@ const NewsDetails = ({route}) => {
 
   const [dynamicLink, setDynamicLink] = useState('');
 
-  const [response, loading, error, _] = useGetData(
-    `${myNetwork.routes.byId}/${uuid}`,
-  );
+  const [response, {isLoading, isResolved, isRejected}, errorMessage, _] =
+    useGetData(`${myNetwork.routes.byId}/${uuid}`);
 
   useEffect(() => {
     async function buildDynamicLink() {
@@ -42,8 +41,8 @@ const NewsDetails = ({route}) => {
 
   return (
     <>
-      {loading && <ActivityIndicator />}
-      {response && (
+      {isLoading && <ActivityIndicator />}
+      {isResolved && (
         <View style={styles.container}>
           <Image
             style={styles.image}
@@ -103,13 +102,13 @@ const NewsDetails = ({route}) => {
           </View>
         </View>
       )}
-      {error.isOccurred && (
+      {isRejected && (
         <Text
           style={{
             ...styles.text,
             ...Theme.text(themeMode),
           }}>
-          {error.message}
+          {errorMessage}
         </Text>
       )}
     </>

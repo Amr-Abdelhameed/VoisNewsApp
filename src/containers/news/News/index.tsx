@@ -19,9 +19,13 @@ const News = ({navigation}) => {
   const [filteredList, setFilteredList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const [response, loading, error, refetch, loadMore] = useGetData(
-    myNetwork.routes.top,
-  );
+  const [
+    response,
+    {isLoading, _, isRejected},
+    errorMessage,
+    refetch,
+    loadMore,
+  ] = useGetData(myNetwork.routes.top);
 
   useEffect(() => {
     async function fireDynamicLink() {
@@ -75,17 +79,16 @@ const News = ({navigation}) => {
       <FlatList
         data={filteredList}
         renderItem={renderItem}
-        initialNumToRender={5}
         onEndReached={onLoadMore}
         keyExtractor={item => item.uuid}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
-      {loading && <ActivityIndicator />}
-      {error.isOccurred && (
+      {isLoading && <ActivityIndicator />}
+      {isRejected && (
         <Text style={{...styles.error, ...Theme.text(themeMode)}}>
-          {error.message}
+          {errorMessage}
         </Text>
       )}
     </>
