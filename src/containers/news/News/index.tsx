@@ -58,7 +58,7 @@ const News = ({navigation}) => {
   };
 
   const onLoadMore = () => {
-    loadMore();
+    if (searchQuery.length == 0) loadMore();
   };
 
   return (

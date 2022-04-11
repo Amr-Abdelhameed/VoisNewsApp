@@ -16,12 +16,9 @@ export function useGetData(route: string) {
           await axiosInstance.get(route, {params: {page: page}})
         ).data;
 
-        // if (route == myNetwork.routes.top)
-        //   if (page == 1) setResponse(_response.data);
-        //   else setResponse(response.concat(_response.data));
-        // else setResponse(_response);
-
-        if (route == myNetwork.routes.top) setResponse(_response.data);
+        if (route == myNetwork.routes.top)
+          if (page == 1) setResponse(_response.data);
+          else setResponse(response.concat(_response.data));
         else setResponse(_response);
 
         setError({isOccurred: false, message: ''});
@@ -44,7 +41,7 @@ export function useGetData(route: string) {
   }
 
   function loadMore() {
-    // setPage(page + 1);
+    setPage(page + 1);
   }
 
   return [response, loading, error, refetch, loadMore];
