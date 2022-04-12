@@ -1,28 +1,28 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import Navigation from './navigation';
-import AppContext from './context/AppContext';
-import {getTheme, Themes} from './preferences/Theme';
+import ThemeContext from './context/ThemeContext';
+import {getTheme} from './preferences/Theme';
 import {setLocale, getLanguage} from './preferences/Locale';
+import {Themes} from './preferences/Theme/types';
 
 const App = () => {
   const [themeMode, setThemeMode] = useState<string>(Themes.light);
 
-  const appConfiguration = useCallback(async function () {
-    const theme = await getTheme();
-    theme && setThemeMode(theme);
+  useEffect(() => {
+    async function getAppConfig() {
+      const theme = await getTheme();
+      theme && setThemeMode(theme);
 
-    const lang = await getLanguage();
-    lang && setLocale(lang);
+      const lang = await getLanguage();
+      lang && setLocale(lang);
+    }
+    getAppConfig();
   }, []);
 
-  useEffect(() => {
-    appConfiguration();
-  }, [appConfiguration]);
-
   return (
-    <AppContext.Provider value={{themeMode, setThemeMode}}>
+    <ThemeContext.Provider value={{themeMode, setThemeMode}}>
       <Navigation />
-    </AppContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

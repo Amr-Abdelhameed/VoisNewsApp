@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   Text,
@@ -10,17 +10,16 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {getLocaleValue} from '../../preferences/Locale';
-import AppContext from '../../context/AppContext';
-import * as Theme from '../../preferences/Theme';
 import {buildShortLink} from '../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
 import {myNetwork} from '../../utils/constants';
 import {useGetData} from '../../services/useGetData';
+import {useAppTheme} from '../../preferences/Theme/useAppTheme';
 
 const NewsDetails = ({route}) => {
-  const {uuid} = route.params;
+  const {colors} = useAppTheme();
 
-  const {themeMode} = useContext(AppContext);
+  const {uuid} = route.params;
 
   const [dynamicLink, setDynamicLink] = useState('');
 
@@ -50,17 +49,17 @@ const NewsDetails = ({route}) => {
             resizeMode="stretch"
           />
           <View style={styles.textContainer}>
-            <Text style={[styles.text, Theme.text(themeMode)]}>
+            <Text style={[styles.text, {color: colors.primaryColor}]}>
               {response.title}
             </Text>
-            <Text style={[styles.text, Theme.text(themeMode)]}>
+            <Text style={[styles.text, {color: colors.primaryColor}]}>
               {response.description}
             </Text>
-            <Text style={[styles.text, Theme.text(themeMode)]}>
+            <Text style={[styles.text, {color: colors.primaryColor}]}>
               {getLocaleValue('publishedAt')}:{' '}
               {response.published_at.substring(0, 10)}
             </Text>
-            <Text style={[styles.text, Theme.text(themeMode)]}>
+            <Text style={[styles.text, {color: colors.primaryColor}]}>
               {getLocaleValue('source')}: {response.source}
             </Text>
             <Text
@@ -69,11 +68,11 @@ const NewsDetails = ({route}) => {
               {response.url}
             </Text>
             <View style={{margin: scale(8)}} />
-            <View style={[styles.button, Theme.btn(themeMode)]}>
+            <View style={[styles.button, {backgroundColor: colors.btnColor}]}>
               <TouchableWithoutFeedback onPress={onShare}>
                 <Text
                   style={{
-                    color: Theme.btnText(themeMode).color,
+                    color: colors.btnTextColor,
                   }}>
                   {getLocaleValue('share')}
                 </Text>
@@ -83,7 +82,9 @@ const NewsDetails = ({route}) => {
         </View>
       )}
       {isRejected && (
-        <Text style={[styles.text, Theme.text(themeMode)]}>{errorMessage}</Text>
+        <Text style={[styles.text, {color: colors.primaryColor}]}>
+          {errorMessage}
+        </Text>
       )}
     </>
   );

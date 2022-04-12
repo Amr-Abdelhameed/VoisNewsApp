@@ -1,13 +1,7 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 import axiosInstance from './axiosInstant';
 import {myNetwork} from '../utils/constants';
-
-export enum State {
-  idle = 'idle',
-  pending = 'pending',
-  resolved = 'resolved',
-  rejected = 'rejected',
-}
+import {State} from './State';
 
 export function useGetData(route: string) {
   const [response, setResponse] = useState(null);
@@ -15,8 +9,8 @@ export function useGetData(route: string) {
   const [errorMessage, setErrorMessage] = useState('');
   const [page, setPage] = useState(1);
 
-  const getData = useCallback(
-    async function () {
+  useEffect(() => {
+    async function getData() {
       setStatus(State.pending);
       try {
         const _response = (
@@ -33,21 +27,13 @@ export function useGetData(route: string) {
         setStatus(State.rejected);
         setErrorMessage(_error.message);
       }
-    },
-    [page],
-  );
-
-  useEffect(() => {
+    }
     getData();
-  }, [getData]);
+  }, [page]);
 
-  function refetch() {
-    setPage(1);
-  }
+  const refetch = () => setPage(1);
 
-  function loadMore() {
-    setPage(page + 1);
-  }
+  const loadMore = () => setPage(page + 1);
 
   return [
     response,

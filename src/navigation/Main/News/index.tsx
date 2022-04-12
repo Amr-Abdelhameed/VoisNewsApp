@@ -4,24 +4,23 @@ import News from '../../../screens/News';
 import NewsDetails from '../../../screens/NewsDetails';
 import {routes} from '../../../utils/constants';
 import {getLocaleValue} from '../../../preferences/Locale';
-import AppContext from '../../../context/AppContext';
-import * as Theme from '../../../preferences/Theme';
+import {useAppTheme} from '../../../preferences/Theme/useAppTheme';
 
 const NewsStack = createNativeStackNavigator();
 
 export default function NewsRoot() {
-  const {themeMode} = useContext(AppContext);
+  const {colors} = useAppTheme();
 
   return (
     <NewsStack.Navigator
       screenOptions={() => ({
         headerStyle: {
-          backgroundColor: Theme.background(themeMode).backgroundColor,
+          backgroundColor: colors.accentColor,
         },
         contentStyle: {
-          backgroundColor: Theme.background(themeMode).backgroundColor,
+          backgroundColor: colors.accentColor,
         },
-        headerTintColor: Theme.text(themeMode).color,
+        headerTintColor: colors.primaryColor,
       })}>
       <NewsStack.Screen
         name={routes.main.news.name}

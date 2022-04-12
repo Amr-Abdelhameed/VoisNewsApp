@@ -1,19 +1,18 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FlatList, RefreshControl, Text, ActivityIndicator} from 'react-native';
 import {Searchbar} from 'react-native-paper';
 import NewsItem from './NewsItem';
 import {routes, myNetwork} from '../../utils/constants';
 import styles from './styles';
 import {getLocaleValue} from '../../preferences/Locale';
-import AppContext from '../../context/AppContext';
-import * as Theme from '../../preferences/Theme';
 import {wait} from '../../utils/helper';
 import {getFilteredNews} from './NewsHelper';
 import {getUIdByDynamicLink} from '../../utils/Firebase';
 import {useGetData} from '../../services/useGetData';
+import {useAppTheme} from '../../preferences/Theme/useAppTheme';
 
 const News = ({navigation}) => {
-  const {themeMode} = useContext(AppContext);
+  const {colors} = useAppTheme();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredList, setFilteredList] = useState([]);
@@ -68,13 +67,13 @@ const News = ({navigation}) => {
   return (
     <>
       <Searchbar
-        iconColor={Theme.placeHolderIconColor(themeMode)}
+        iconColor={colors.placeHolderIconColor}
         placeholder={getLocaleValue('search')}
-        placeholderTextColor={Theme.placeHolderColor(themeMode)}
+        placeholderTextColor={colors.placeHolderColor}
         value={searchQuery}
         onChangeText={setSearchQuery}
-        inputStyle={Theme.text(themeMode)}
-        style={Theme.background(themeMode)}
+        inputStyle={{color: colors.primaryColor}}
+        style={{backgroundColor: colors.accentColor}}
       />
       <FlatList
         data={filteredList}
@@ -87,7 +86,7 @@ const News = ({navigation}) => {
       />
       {isLoading && <ActivityIndicator />}
       {isRejected && (
-        <Text style={[styles.error, Theme.text(themeMode)]}>
+        <Text style={[styles.error, {color: colors.primaryColor}]}>
           {errorMessage}
         </Text>
       )}

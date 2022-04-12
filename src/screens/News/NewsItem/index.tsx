@@ -1,22 +1,22 @@
 import React, {useContext} from 'react';
 import {View, Image, Text, TouchableWithoutFeedback} from 'react-native';
+import {useAppTheme} from '../../../preferences/Theme/useAppTheme';
 import styles from './styles';
-import AppContext from '../../../context/AppContext';
-import * as Theme from '../../../preferences/Theme';
 
 const NewsItem = ({item, onPress}) => {
-  const {themeMode} = useContext(AppContext);
+  const {colors} = useAppTheme();
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={[styles.container, Theme.card(themeMode)]}>
+      <View
+        style={[styles.container, {backgroundColor: colors.secondaryColor}]}>
         <Image
           style={styles.image}
           source={{uri: item.image_url}}
           resizeMode="stretch"
         />
         <View style={styles.textContainer}>
-          <Text style={Theme.text(themeMode)}>{item.title}</Text>
+          <Text style={{color: colors.primaryColor}}>{item.title}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

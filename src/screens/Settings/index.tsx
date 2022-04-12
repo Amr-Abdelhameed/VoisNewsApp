@@ -1,42 +1,41 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import {getLocaleValue, setLanguage} from '../../preferences/Locale';
-import AppContext from '../../context/AppContext';
 import {RadioButton} from 'react-native-paper';
 import RNRestart from 'react-native-restart';
 import styles from './styles';
 import {scale} from 'react-native-size-matters';
-import * as Theme from '../../preferences/Theme';
 import DarkSwitch from '../../components/DarkSwitch';
+import {useAppTheme} from '../../preferences/Theme/useAppTheme';
 
 const Settings = () => {
-  const {themeMode} = useContext(AppContext);
+  const {colors} = useAppTheme();
 
   const [value, setValue] = useState(getLocaleValue('locale'));
 
   return (
     <View style={styles.container}>
       <View style={styles.item}>
-        <Text style={[styles.text, Theme.text(themeMode)]}>
+        <Text style={[styles.text, {color: colors.primaryColor}]}>
           {getLocaleValue('darkMode')}
         </Text>
         <View style={{marginHorizontal: scale(8)}} />
         <DarkSwitch />
       </View>
       <View style={{marginVertical: scale(32)}}>
-        <View style={[styles.line, Theme.btn(themeMode)]} />
+        <View style={[styles.line, {backgroundColor: colors.btnColor}]} />
       </View>
       <RadioButton.Group value={value} onValueChange={setValue}>
         <View style={styles.item}>
           <View>
-            <Text style={Theme.text(themeMode)}>
+            <Text style={{color: colors.primaryColor}}>
               {getLocaleValue('english')}
             </Text>
             <RadioButton value="us" />
           </View>
           <View style={{marginHorizontal: scale(16)}} />
           <View>
-            <Text style={Theme.text(themeMode)}>
+            <Text style={{color: colors.primaryColor}}>
               {getLocaleValue('german')}
             </Text>
             <RadioButton value="de" />
@@ -44,7 +43,7 @@ const Settings = () => {
         </View>
       </RadioButton.Group>
       <View style={{marginVertical: scale(8)}} />
-      <View style={[styles.button, Theme.btn(themeMode)]}>
+      <View style={[styles.button, {backgroundColor: colors.btnColor}]}>
         <TouchableWithoutFeedback
           onPress={() => {
             if (getLocaleValue('locale') != value) {
@@ -54,7 +53,7 @@ const Settings = () => {
           }}>
           <Text
             style={{
-              color: Theme.btnText(themeMode).color,
+              color: colors.btnTextColor,
             }}>
             {getLocaleValue('changeLanguage')}
           </Text>

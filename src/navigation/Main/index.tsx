@@ -1,17 +1,16 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import NewsRoot from './News';
 import SettingsRoot from './Settings';
 import {routes} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getLocaleValue} from '../../preferences/Locale';
-import AppContext from '../../context/AppContext';
-import * as Theme from '../../preferences/Theme';
+import {useAppTheme} from '../../preferences/Theme/useAppTheme';
 
 const BottomTabNav = createBottomTabNavigator();
 
 export default function BottomNavigationRoot() {
-  const {themeMode} = useContext(AppContext);
+  const {colors} = useAppTheme();
 
   return (
     <BottomTabNav.Navigator
@@ -19,10 +18,10 @@ export default function BottomNavigationRoot() {
         headerShown: false,
         tabBarStyle: {
           borderTopWidth: 0,
-          backgroundColor: Theme.background(themeMode).backgroundColor,
+          backgroundColor: colors.accentColor,
         },
-        tabBarActiveTintColor: Theme.tabBarActiveTintColor(themeMode),
-        tabBarInactiveTintColor: Theme.tabBarInactiveTintColor(themeMode),
+        tabBarActiveTintColor: colors.tabBarActiveTintColor,
+        tabBarInactiveTintColor: colors.tabBarInactiveTintColor,
       })}>
       <BottomTabNav.Screen
         name={routes.main.news.stack}

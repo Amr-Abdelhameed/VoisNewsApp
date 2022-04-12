@@ -34,3 +34,8 @@ export const myStorage = Object.freeze({
   themeMode: '@themeMode',
   langauge: '@langauge',
 });
+
+export const darkModeSwitchColors = Object.freeze({
+  false: '#767577',
+  true: '#81b0ff',
+});
