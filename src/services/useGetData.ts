@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import axiosInstance from '../services/axiosInstant';
+import axiosInstance from './axiosInstant';
 import {myNetwork} from '../utils/constants';
 
 export enum State {
@@ -49,13 +49,13 @@ export function useGetData(route: string) {
     setPage(page + 1);
   }
 
-  const isLoading = status === State.idle || status === State.pending,
-    isResolved = status === State.resolved,
-    isRejected = status === State.rejected;
-
   return [
     response,
-    {isLoading, isResolved, isRejected},
+    {
+      isLoading: status === State.idle || status === State.pending,
+      isResolved: status === State.resolved,
+      isRejected: status === State.rejected,
+    },
     errorMessage,
     refetch,
     loadMore,

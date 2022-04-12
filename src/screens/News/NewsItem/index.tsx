@@ -9,7 +9,7 @@ const NewsItem = ({item, onPress}) => {
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={{...styles.container, ...Theme.card(themeMode)}}>
+      <View style={[styles.container, Theme.card(themeMode)]}>
         <Image
           style={styles.image}
           source={{uri: item.image_url}}

@@ -9,13 +9,13 @@ import {
   Share,
 } from 'react-native';
 import styles from './styles';
-import {getLocaleValue} from '../../../preferences/Locale';
-import AppContext from '../../../context/AppContext';
-import * as Theme from '../../../preferences/Theme';
-import {buildShortLink} from '../../../utils/Firebase';
+import {getLocaleValue} from '../../preferences/Locale';
+import AppContext from '../../context/AppContext';
+import * as Theme from '../../preferences/Theme';
+import {buildShortLink} from '../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
-import {myNetwork} from '../../../utils/constants';
-import {useGetData} from '../../../hooks/useGetData';
+import {myNetwork} from '../../utils/constants';
+import {useGetData} from '../../services/useGetData';
 
 const NewsDetails = ({route}) => {
   const {uuid} = route.params;
@@ -50,33 +50,17 @@ const NewsDetails = ({route}) => {
             resizeMode="stretch"
           />
           <View style={styles.textContainer}>
-            <Text
-              style={{
-                ...styles.text,
-                ...Theme.text(themeMode),
-              }}>
+            <Text style={[styles.text, Theme.text(themeMode)]}>
               {response.title}
             </Text>
-            <Text
-              style={{
-                ...styles.text,
-                ...Theme.text(themeMode),
-              }}>
+            <Text style={[styles.text, Theme.text(themeMode)]}>
               {response.description}
             </Text>
-            <Text
-              style={{
-                ...styles.text,
-                ...Theme.text(themeMode),
-              }}>
+            <Text style={[styles.text, Theme.text(themeMode)]}>
               {getLocaleValue('publishedAt')}:{' '}
               {response.published_at.substring(0, 10)}
             </Text>
-            <Text
-              style={{
-                ...styles.text,
-                ...Theme.text(themeMode),
-              }}>
+            <Text style={[styles.text, Theme.text(themeMode)]}>
               {getLocaleValue('source')}: {response.source}
             </Text>
             <Text
@@ -85,11 +69,7 @@ const NewsDetails = ({route}) => {
               {response.url}
             </Text>
             <View style={{margin: scale(8)}} />
-            <View
-              style={{
-                ...styles.button,
-                ...Theme.btn(themeMode),
-              }}>
+            <View style={[styles.button, Theme.btn(themeMode)]}>
               <TouchableWithoutFeedback onPress={onShare}>
                 <Text
                   style={{
@@ -103,13 +83,7 @@ const NewsDetails = ({route}) => {
         </View>
       )}
       {isRejected && (
-        <Text
-          style={{
-            ...styles.text,
-            ...Theme.text(themeMode),
-          }}>
-          {errorMessage}
-        </Text>
+        <Text style={[styles.text, Theme.text(themeMode)]}>{errorMessage}</Text>
       )}
     </>
   );

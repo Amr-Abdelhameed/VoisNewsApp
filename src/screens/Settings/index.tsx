@@ -17,23 +17,14 @@ const Settings = () => {
   return (
     <View style={styles.container}>
       <View style={styles.item}>
-        <Text
-          style={{
-            ...styles.text,
-            ...Theme.text(themeMode),
-          }}>
+        <Text style={[styles.text, Theme.text(themeMode)]}>
           {getLocaleValue('darkMode')}
         </Text>
         <View style={{marginHorizontal: scale(8)}} />
         <DarkSwitch />
       </View>
       <View style={{marginVertical: scale(32)}}>
-        <View
-          style={{
-            ...styles.line,
-            ...Theme.btn(themeMode),
-          }}
-        />
+        <View style={[styles.line, Theme.btn(themeMode)]} />
       </View>
       <RadioButton.Group value={value} onValueChange={setValue}>
         <View style={styles.item}>
@@ -53,11 +44,7 @@ const Settings = () => {
         </View>
       </RadioButton.Group>
       <View style={{marginVertical: scale(8)}} />
-      <View
-        style={{
-          ...styles.button,
-          ...Theme.btn(themeMode),
-        }}>
+      <View style={[styles.button, Theme.btn(themeMode)]}>
         <TouchableWithoutFeedback
           onPress={() => {
             if (getLocaleValue('locale') != value) {
