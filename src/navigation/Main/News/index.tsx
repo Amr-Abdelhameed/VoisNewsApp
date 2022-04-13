@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import News from '../../../screens/News';
 import NewsDetails from '../../../screens/NewsDetails';
 import {routes} from '../../../utils/constants';
 import {getLocaleValue} from '../../../preferences/Locale';
-import {useAppTheme} from '../../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../../preferences/Theme/use-app-theme';
 
 const NewsStack = createNativeStackNavigator();
 

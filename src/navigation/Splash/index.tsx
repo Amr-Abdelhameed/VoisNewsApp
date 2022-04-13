@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Splash from '../../screens/Splash';
 import {routes} from '../../utils/constants';
-import {useAppTheme} from '../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 
 const SplashStack = createNativeStackNavigator();
 

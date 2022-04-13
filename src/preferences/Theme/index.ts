@@ -1,6 +1,6 @@
 import {setData, getData} from '../LocalStorage';
 import {myStorage} from '../../utils/constants';
-import {Themes} from './types';
+import {Themes} from './themes';
 
 export const setTheme = (value: string) => {
   setData(myStorage.themeMode, value);

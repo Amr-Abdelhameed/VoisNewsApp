@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {View, Image, Text, TouchableWithoutFeedback} from 'react-native';
-import {useAppTheme} from '../../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../../preferences/Theme/use-app-theme';
 import styles from './styles';
 
 const NewsItem = ({item, onPress}) => {

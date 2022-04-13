@@ -13,8 +13,8 @@ import {getLocaleValue} from '../../preferences/Locale';
 import {buildShortLink} from '../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
 import {myNetwork} from '../../utils/constants';
-import {useGetData} from '../../services/useGetData';
-import {useAppTheme} from '../../preferences/Theme/useAppTheme';
+import {useGetData} from '../../services/use-get-data';
+import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 
 const NewsDetails = ({route}) => {
   const {colors} = useAppTheme();
@@ -23,7 +23,7 @@ const NewsDetails = ({route}) => {
 
   const [dynamicLink, setDynamicLink] = useState('');
 
-  const [response, {isLoading, isResolved, isRejected}, errorMessage, _] =
+  const [response, {isLoading, isResolved, isRejected}, errorMessage] =
     useGetData(`${myNetwork.routes.byId}/${uuid}`);
 
   useEffect(() => {

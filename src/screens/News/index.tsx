@@ -5,11 +5,11 @@ import NewsItem from './NewsItem';
 import {routes, myNetwork} from '../../utils/constants';
 import styles from './styles';
 import {getLocaleValue} from '../../preferences/Locale';
-import {wait} from '../../utils/helper';
-import {getFilteredNews} from './NewsHelper';
+import {wait} from '../../utils/app-helper';
+import {getFilteredNews} from './news-helper';
 import {getUIdByDynamicLink} from '../../utils/Firebase';
-import {useGetData} from '../../services/useGetData';
-import {useAppTheme} from '../../preferences/Theme/useAppTheme';
+import {useGetData} from '../../services/use-get-data';
+import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 
 const News = ({navigation}) => {
   const {colors} = useAppTheme();
@@ -18,13 +18,8 @@ const News = ({navigation}) => {
   const [filteredList, setFilteredList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const [
-    response,
-    {isLoading, isResolved, isRejected},
-    errorMessage,
-    refetch,
-    loadMore,
-  ] = useGetData(myNetwork.routes.top);
+  const [response, {isLoading, isRejected}, errorMessage, refetch, loadMore] =
+    useGetData(myNetwork.routes.top);
 
   useEffect(() => {
     async function fireDynamicLink() {

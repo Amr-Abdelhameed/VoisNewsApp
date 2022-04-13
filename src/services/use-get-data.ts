@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
-import axiosInstance from './axiosInstant';
+import axiosInstance from './axios-instant';
 import {myNetwork} from '../utils/constants';
-import {State} from './State';
+import {State} from './state';
 
 export function useGetData(route: string) {
   const [response, setResponse] = useState(null);
@@ -23,9 +23,9 @@ export function useGetData(route: string) {
         else setResponse(_response);
 
         setStatus(State.resolved);
-      } catch (_error) {
+      } catch (error) {
         setStatus(State.rejected);
-        setErrorMessage(_error.message);
+        setErrorMessage(error.message);
       }
     }
     getData();

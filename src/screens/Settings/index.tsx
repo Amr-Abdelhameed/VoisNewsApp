@@ -6,7 +6,7 @@ import RNRestart from 'react-native-restart';
 import styles from './styles';
 import {scale} from 'react-native-size-matters';
 import DarkSwitch from '../../components/DarkSwitch';
-import {useAppTheme} from '../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 
 const Settings = () => {
   const {colors} = useAppTheme();

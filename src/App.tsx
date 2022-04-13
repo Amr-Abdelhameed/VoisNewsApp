@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Navigation from './navigation';
-import ThemeContext from './context/ThemeContext';
+import ThemeContext from './context/theme-context';
 import {getTheme} from './preferences/Theme';
 import {setLocale, getLanguage} from './preferences/Locale';
-import {Themes} from './preferences/Theme/types';
+import {Themes} from './preferences/Theme/themes';
 
 const App = () => {
   const [themeMode, setThemeMode] = useState<string>(Themes.light);

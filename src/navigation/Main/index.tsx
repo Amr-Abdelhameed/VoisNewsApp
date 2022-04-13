@@ -5,7 +5,7 @@ import SettingsRoot from './Settings';
 import {routes} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getLocaleValue} from '../../preferences/Locale';
-import {useAppTheme} from '../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 
 const BottomTabNav = createBottomTabNavigator();
 

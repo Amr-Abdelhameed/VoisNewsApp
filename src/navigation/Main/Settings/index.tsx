@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Settings from '../../../screens/Settings';
 import {routes} from '../../../utils/constants';
 import {getLocaleValue} from '../../../preferences/Locale';
-import {useAppTheme} from '../../../preferences/Theme/useAppTheme';
+import {useAppTheme} from '../../../preferences/Theme/use-app-theme';
 
 const SettingsStack = createNativeStackNavigator();
 

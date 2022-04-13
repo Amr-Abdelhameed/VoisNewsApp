@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {Switch} from 'react-native';
-import ThemeContext from '../../context/ThemeContext';
+import ThemeContext from '../../context/theme-context';
 import {setTheme} from '../../preferences/Theme';
-import {Themes} from '../../preferences/Theme/types';
+import {Themes} from '../../preferences/Theme/themes';
 import {darkModeSwitchColors} from '../../utils/constants';
 
 const DarkSwitch = () => {
