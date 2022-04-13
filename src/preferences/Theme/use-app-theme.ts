@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import ThemeContext from '../../context/theme-context';
+import ThemeContext from '../../store/theme-context';
 import dark from './dark';
 import light from './light';
 import {Themes} from './themes';

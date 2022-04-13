@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Switch} from 'react-native';
-import ThemeContext from '../../context/theme-context';
+import ThemeContext from '../../store/theme-context';
 import {setTheme} from '../../preferences/Theme';
 import {Themes} from '../../preferences/Theme/themes';
 import {darkModeSwitchColors} from '../../utils/constants';
