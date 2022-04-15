@@ -6,20 +6,20 @@ import {Themes} from '../../preferences/Theme/themes';
 import {darkModeSwitchColors} from '../../utils/constants';
 
 const DarkSwitch = () => {
-  const {themeMode, setThemeMode} = useContext(ThemeContext);
+  const {appTheme, setAppTheme} = useContext(ThemeContext);
 
   const toggleTheme = (theme: string) =>
     theme == Themes.light ? Themes.dark : Themes.light;
 
   const toggleSwitch = () => {
-    setTheme(toggleTheme(themeMode));
-    setThemeMode((previousState: string) => toggleTheme(previousState));
+    setTheme(toggleTheme(appTheme));
+    setAppTheme((previousState: string) => toggleTheme(previousState));
   };
 
   return (
     <Switch
       trackColor={darkModeSwitchColors}
-      value={themeMode != Themes.light}
+      value={appTheme != Themes.light}
       onValueChange={toggleSwitch}
     />
   );

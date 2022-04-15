@@ -1,4 +1,5 @@
 export default {
+  language: 'en',
   locale: 'us',
   news: 'News',
   details: 'Article Details',
@@ -8,7 +9,7 @@ export default {
   german: 'German',
   publishedAt: 'Published at',
   source: 'Source',
-  changeLanguage: 'Change Language',
   share: 'Share',
   darkMode: 'Dark mode',
+  back: 'Back',
 };

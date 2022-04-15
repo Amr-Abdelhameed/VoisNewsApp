@@ -4,13 +4,14 @@ import NewsRoot from './News';
 import SettingsRoot from './Settings';
 import {routes} from '../../utils/constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {getLocaleValue} from '../../preferences/Locale';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
+import {useAppLanguage} from '../../preferences/Locale/use-app-language';
 
 const BottomTabNav = createBottomTabNavigator();
 
 export default function BottomNavigationRoot() {
   const {colors} = useAppTheme();
+  const {strings} = useAppLanguage();
 
   return (
     <BottomTabNav.Navigator
@@ -27,7 +28,7 @@ export default function BottomNavigationRoot() {
         name={routes.main.news.stack}
         component={NewsRoot}
         options={{
-          tabBarLabel: getLocaleValue('news'),
+          tabBarLabel: strings.news,
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
@@ -37,7 +38,7 @@ export default function BottomNavigationRoot() {
         name={routes.main.settings.stack}
         component={SettingsRoot}
         options={{
-          tabBarLabel: getLocaleValue('settings'),
+          tabBarLabel: strings.settings,
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="cog-outline"

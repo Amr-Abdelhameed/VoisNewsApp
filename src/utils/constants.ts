@@ -31,7 +31,7 @@ export const myLocalization = Object.freeze({
 });
 
 export const myStorage = Object.freeze({
-  themeMode: '@themeMode',
+  theme: '@theme',
   langauge: '@langauge',
 });
 

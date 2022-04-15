@@ -4,15 +4,16 @@ import {Searchbar} from 'react-native-paper';
 import NewsItem from './NewsItem';
 import {routes, myNetwork} from '../../utils/constants';
 import styles from './styles';
-import {getLocaleValue} from '../../preferences/Locale';
 import {wait} from '../../utils/app-helper';
 import {getFilteredNews} from './news-helper';
 import {getUIdByDynamicLink} from '../../utils/Firebase';
 import {useGetData} from '../../services/use-get-data';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
+import {useAppLanguage} from '../../preferences/Locale/use-app-language';
 
 const News = ({navigation}) => {
   const {colors} = useAppTheme();
+  const {strings} = useAppLanguage();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredList, setFilteredList] = useState([]);
@@ -36,6 +37,11 @@ const News = ({navigation}) => {
   useEffect(() => {
     if (response) setFilteredList(getFilteredNews(searchQuery, response));
   }, [searchQuery]);
+
+  useEffect(() => {
+    setSearchQuery('');
+    refetch();
+  }, [strings]);
 
   const renderItem = ({item}) => (
     <NewsItem
@@ -63,7 +69,7 @@ const News = ({navigation}) => {
     <>
       <Searchbar
         iconColor={colors.placeHolderIconColor}
-        placeholder={getLocaleValue('search')}
+        placeholder={strings.search}
         placeholderTextColor={colors.placeHolderColor}
         value={searchQuery}
         onChangeText={setSearchQuery}

@@ -5,6 +5,6 @@ import light from './light';
 import {Themes} from './themes';
 
 export function useAppTheme() {
-  const {themeMode} = useContext(ThemeContext);
-  return Object.freeze({colors: themeMode == Themes.light ? light : dark});
+  const {appTheme} = useContext(ThemeContext);
+  return Object.freeze({colors: appTheme == Themes.light ? light : dark});
 }

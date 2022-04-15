@@ -3,11 +3,11 @@ import {myStorage} from '../../utils/constants';
 import {Themes} from './themes';
 
 export const setTheme = (value: string) => {
-  setData(myStorage.themeMode, value);
+  setData(myStorage.theme, value);
 };
 
 export const getTheme = async () => {
-  let themeMode = await getData(myStorage.themeMode);
-  themeMode = themeMode != null ? themeMode : Themes.light;
-  return themeMode;
+  let theme = await getData(myStorage.theme);
+  theme = theme != null ? theme : Themes.light;
+  return theme;
 };

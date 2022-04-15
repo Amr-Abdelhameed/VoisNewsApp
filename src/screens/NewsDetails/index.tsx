@@ -9,15 +9,16 @@ import {
   Share,
 } from 'react-native';
 import styles from './styles';
-import {getLocaleValue} from '../../preferences/Locale';
 import {buildShortLink} from '../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
 import {myNetwork} from '../../utils/constants';
 import {useGetData} from '../../services/use-get-data';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
+import {useAppLanguage} from '../../preferences/Locale/use-app-language';
 
 const NewsDetails = ({route}) => {
   const {colors} = useAppTheme();
+  const {strings} = useAppLanguage();
 
   const {uuid} = route.params;
 
@@ -56,11 +57,10 @@ const NewsDetails = ({route}) => {
               {response.description}
             </Text>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {getLocaleValue('publishedAt')}:{' '}
-              {response.published_at.substring(0, 10)}
+              {strings.publishedAt}: {response.published_at.substring(0, 10)}
             </Text>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {getLocaleValue('source')}: {response.source}
+              {strings.source}: {response.source}
             </Text>
             <Text
               style={styles.hyberLink}
@@ -74,7 +74,7 @@ const NewsDetails = ({route}) => {
                   style={{
                     color: colors.btnTextColor,
                   }}>
-                  {getLocaleValue('share')}
+                  {strings.share}
                 </Text>
               </TouchableWithoutFeedback>
             </View>
