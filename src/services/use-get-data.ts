@@ -8,7 +8,7 @@ export function useGetData(route: string) {
   const [response, setResponse] = useState(null);
   const [status, setStatus] = useState(State.idle);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isRefresh, setIsRefresh] = useState(false);
+  const [isRefresh, setIsRefresh] = useState(true);
   const [page, setPage] = useState(1);
 
   const {strings} = useAppLanguage();
@@ -17,11 +17,9 @@ export function useGetData(route: string) {
     async function getData() {
       setStatus(State.pending);
       try {
-        const _response = (
-          await axiosInstance.get(route, {
-            params: {locale: strings.locale, page: page},
-          })
-        ).data;
+        const params = {locale: strings.locale, page: page};
+
+        const _response = (await axiosInstance.get(route, {params})).data;
 
         if (route == myNetwork.routes.top)
           if (page == 1) setResponse(_response.data);
@@ -36,7 +34,7 @@ export function useGetData(route: string) {
         setIsRefresh(false);
       }
     }
-    getData();
+    if (isRefresh) getData();
   }, [isRefresh, page]);
 
   const refetch = () => {
@@ -44,7 +42,10 @@ export function useGetData(route: string) {
     setIsRefresh(true);
   };
 
-  const loadMore = () => setPage(page + 1);
+  const loadMore = () => {
+    setPage(page + 1);
+    setIsRefresh(true);
+  };
 
   return [
     response,
