@@ -1,10 +1,7 @@
-import {useContext} from 'react';
-import ThemeContext from '../../store/theme-context';
-import dark from './dark';
-import light from './light';
-import {Themes} from './themes';
+import {useAppSelector} from '../../utils/Hooks';
 
 export function useAppTheme() {
-  const {appTheme} = useContext(ThemeContext);
-  return Object.freeze({colors: appTheme == Themes.light ? light : dark});
+  const colors = useAppSelector(state => state.theme.colors);
+  const mode = useAppSelector(state => state.theme.mode);
+  return {colors, mode};
 }

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, Image, Text, TouchableWithoutFeedback} from 'react-native';
 import {useAppTheme} from '../../../preferences/Theme/use-app-theme';
 import styles from './styles';

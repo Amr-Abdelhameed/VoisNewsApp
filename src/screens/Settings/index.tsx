@@ -1,26 +1,26 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {setLanguage} from '../../preferences/Locale';
 import {RadioButton} from 'react-native-paper';
 import styles from './styles';
 import {scale} from 'react-native-size-matters';
 import DarkSwitch from '../../components/DarkSwitch';
+import {setAppLanguage} from '../../store/language-slice';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
-import LanguageContext from '../../store/language-context';
+import {useAppDispatch} from '../../utils/Hooks';
 
 const Settings = () => {
   const {colors} = useAppTheme();
-
   const {strings} = useAppLanguage();
 
-  const {setAppLanguage} = useContext(LanguageContext);
+  const dispatch = useAppDispatch();
 
   const [value, setValue] = useState(strings.language);
 
   useEffect(() => {
     setLanguage(value);
-    setAppLanguage(value);
+    dispatch(setAppLanguage(value));
   }, [value]);
 
   return (
