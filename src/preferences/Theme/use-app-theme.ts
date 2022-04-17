@@ -1,4 +1,4 @@
-import {useAppSelector} from '../../utils/Hooks';
+import {useAppSelector} from '../../utils/app-helper';
 
 export function useAppTheme() {
   const colors = useAppSelector(state => state.theme.colors);

@@ -14,7 +14,7 @@ import {scale} from 'react-native-size-matters';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
 import {useNewsDetailsData} from './use-news-details-data';
-import {useAppDispatch} from '../../utils/Hooks';
+import {useAppDispatch} from '../../utils/app-helper';
 import {myNetwork} from '../../utils/constants';
 import {fetchArticleById} from '../../store/actions/news-details-actions';
 

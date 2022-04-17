@@ -10,7 +10,7 @@ import {getUIdByDynamicLink} from '../../utils/Firebase';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
 import {useNewsData} from './use-news-data';
-import {useAppDispatch} from '../../utils/Hooks';
+import {useAppDispatch} from '../../utils/app-helper';
 import {fetchNews} from '../../store/actions/news-actions';
 
 const News = ({navigation}) => {

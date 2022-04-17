@@ -1,5 +1,5 @@
 import {State} from '../../services/state';
-import {useAppSelector} from '../../utils/Hooks';
+import {useAppSelector} from '../../utils/app-helper';
 
 export function useNewsDetailsData() {
   const data = useAppSelector(state => state.article.data);

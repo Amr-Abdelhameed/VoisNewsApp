@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Navigation from './navigation';
 import {getTheme} from './preferences/Theme';
 import {getLanguage} from './preferences/Locale';
-import {useAppDispatch} from './utils/Hooks';
+import {useAppDispatch} from './utils/app-helper';
 import {setAppTheme} from './store/theme-slice';
 import {setAppLanguage} from './store/language-slice';
 

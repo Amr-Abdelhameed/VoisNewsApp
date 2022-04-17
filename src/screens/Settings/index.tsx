@@ -8,7 +8,7 @@ import DarkSwitch from '../../components/DarkSwitch';
 import {setAppLanguage} from '../../store/language-slice';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
-import {useAppDispatch} from '../../utils/Hooks';
+import {useAppDispatch} from '../../utils/app-helper';
 
 const Settings = () => {
   const {colors} = useAppTheme();

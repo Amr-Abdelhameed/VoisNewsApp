@@ -5,7 +5,7 @@ import {Themes} from '../../preferences/Theme/themes';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {setAppTheme} from '../../store/theme-slice';
 import {darkModeSwitchColors} from '../../utils/constants';
-import {useAppDispatch} from '../../utils/Hooks';
+import {useAppDispatch} from '../../utils/app-helper';
 
 const DarkSwitch = () => {
   const {mode} = useAppTheme();
