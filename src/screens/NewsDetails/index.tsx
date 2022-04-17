@@ -11,12 +11,16 @@ import {
 import styles from './styles';
 import {buildShortLink} from '../../utils/Firebase';
 import {scale} from 'react-native-size-matters';
-import {myNetwork} from '../../utils/constants';
-import {useGetData} from '../../services/use-get-data';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
+import {useNewsDetailsData} from './use-news-details-data';
+import {useAppDispatch} from '../../utils/Hooks';
+import {myNetwork} from '../../utils/constants';
+import {fetchArticleById} from '../../store/actions/news-details-actions';
 
 const NewsDetails = ({route}) => {
+  const dispatch = useAppDispatch();
+
   const {colors} = useAppTheme();
   const {strings} = useAppLanguage();
 
@@ -24,20 +28,22 @@ const NewsDetails = ({route}) => {
 
   const [dynamicLink, setDynamicLink] = useState('');
 
-  const [response, {isLoading, isResolved, isRejected}, errorMessage] =
-    useGetData(`${myNetwork.routes.byId}/${uuid}`);
+  const {data, status, errorMessage} = useNewsDetailsData();
+  const {isLoading, isResolved, isRejected} = status;
+
+  useEffect(() => {
+    dispatch(fetchArticleById(myNetwork.routes.byId, uuid));
+  }, []);
 
   useEffect(() => {
     async function buildDynamicLink() {
-      const _link = await buildShortLink(uuid);
-      setDynamicLink(_link);
+      const link = await buildShortLink(uuid);
+      setDynamicLink(link);
     }
     buildDynamicLink();
   }, []);
 
-  const onShare = async () => {
-    await Share.share({message: dynamicLink});
-  };
+  const onShare = async () => await Share.share({message: dynamicLink});
 
   return (
     <>
@@ -46,26 +52,26 @@ const NewsDetails = ({route}) => {
         <View style={styles.container}>
           <Image
             style={styles.image}
-            source={{uri: response.image_url}}
+            source={{uri: data.image_url}}
             resizeMode="stretch"
           />
           <View style={styles.textContainer}>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {response.title}
+              {data.title}
             </Text>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {response.description}
+              {data.description}
             </Text>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {strings.publishedAt}: {response.published_at.substring(0, 10)}
+              {strings.publishedAt}: {data.published_at.substring(0, 10)}
             </Text>
             <Text style={[styles.text, {color: colors.primaryColor}]}>
-              {strings.source}: {response.source}
+              {strings.source}: {data.source}
             </Text>
             <Text
               style={styles.hyberLink}
-              onPress={() => Linking.openURL(response.url)}>
-              {response.url}
+              onPress={() => Linking.openURL(data.url)}>
+              {data.url}
             </Text>
             <View style={{margin: scale(8)}} />
             <View style={[styles.button, {backgroundColor: colors.btnColor}]}>

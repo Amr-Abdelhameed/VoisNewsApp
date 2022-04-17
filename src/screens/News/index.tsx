@@ -7,39 +7,55 @@ import styles from './styles';
 import {wait} from '../../utils/app-helper';
 import {getFilteredNews} from './news-helper';
 import {getUIdByDynamicLink} from '../../utils/Firebase';
-import {useGetData} from '../../services/use-get-data';
 import {useAppTheme} from '../../preferences/Theme/use-app-theme';
 import {useAppLanguage} from '../../preferences/Locale/use-app-language';
+import {useNewsData} from './use-news-data';
+import {useAppDispatch} from '../../utils/Hooks';
+import {fetchNews} from '../../store/actions/news-actions';
 
 const News = ({navigation}) => {
+  const dispatch = useAppDispatch();
+
   const {colors} = useAppTheme();
   const {strings} = useAppLanguage();
+
+  const {list, status, errorMessage} = useNewsData();
+  const {isLoading, isRejected} = status;
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredList, setFilteredList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const [response, {isLoading, isRejected}, errorMessage, refetch, loadMore] =
-    useGetData(myNetwork.routes.top);
+  const [page, setPage] = useState(1);
+  const [refreshingCount, setRefreshingCount] = useState(0);
+
+  const refetch = (searchQuery: string = '', page: number = 1) => {
+    setSearchQuery(searchQuery);
+    setPage(page);
+    setRefreshingCount(previous => previous + 1);
+  };
 
   useEffect(() => {
     async function fireDynamicLink() {
       const uId = await getUIdByDynamicLink();
-      if (uId) navigation.navigate(routes.main.news.details, {uuid: uId});
+      uId && navigation.navigate(routes.main.news.details, {uuid: uId});
     }
     fireDynamicLink();
   }, []);
 
   useEffect(() => {
-    if (response) setFilteredList(response);
-  }, [response]);
+    dispatch(fetchNews(myNetwork.routes.top, page, strings.locale));
+  }, [refreshingCount]);
 
   useEffect(() => {
-    if (response) setFilteredList(getFilteredNews(searchQuery, response));
+    list && setFilteredList(list);
+  }, [list]);
+
+  useEffect(() => {
+    list && setFilteredList(getFilteredNews(searchQuery, list));
   }, [searchQuery]);
 
   useEffect(() => {
-    setSearchQuery('');
     refetch();
   }, [strings]);
 
@@ -55,14 +71,13 @@ const News = ({navigation}) => {
   const onRefresh = () => {
     setRefreshing(true);
     wait(2000).then(() => {
-      setSearchQuery('');
       refetch();
       setRefreshing(false);
     });
   };
 
   const onLoadMore = () => {
-    if (searchQuery.length == 0) loadMore();
+    if (searchQuery.length == 0) refetch(searchQuery, page + 1);
   };
 
   return (
