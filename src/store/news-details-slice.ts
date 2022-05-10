@@ -1,9 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {State} from '../services/state';
+import {status} from '../utils/constants';
 
 const initialArticleState = {
   data: null,
-  status: State.idle,
+  status: status.idle,
   errorMessage: '',
 };
 

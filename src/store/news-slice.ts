@@ -1,9 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {State} from '../services/state';
+import {status} from '../utils/constants';
 
 const initialNewsState = {
   list: [],
-  status: State.idle,
+  status: status.idle,
   errorMessage: '',
 };
 

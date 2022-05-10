@@ -26,6 +26,13 @@ export const myNetwork = Object.freeze({
   },
 });
 
+export const status = Object.freeze({
+  idle: 'idle',
+  pending: 'pending',
+  resolved: 'resolved',
+  rejected: 'rejected',
+});
+
 export const myStorage = Object.freeze({
   theme: '@theme',
   langauge: '@langauge',

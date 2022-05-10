@@ -2,7 +2,7 @@ import {AnyAction} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '..';
 import axiosInstance from '../../services/axios-instant';
-import {State} from '../../services/state';
+import {status} from '../../utils/constants';
 import {setStatus, setList, appendList, setErrorMessage} from '../news-slice';
 
 export const fetchNews =
@@ -13,7 +13,7 @@ export const fetchNews =
   ): ThunkAction<void, RootState, unknown, AnyAction> =>
   async dispatch => {
     const getData = async () => {
-      dispatch(setStatus(State.pending));
+      dispatch(setStatus(status.pending));
       try {
         const response = (
           await axiosInstance.get(route, {params: {locale, page}})
@@ -22,9 +22,9 @@ export const fetchNews =
         if (page == 1) dispatch(setList(response.data));
         else dispatch(appendList(response.data));
 
-        dispatch(setStatus(State.resolved));
+        dispatch(setStatus(status.resolved));
       } catch (error) {
-        dispatch(setStatus(State.rejected));
+        dispatch(setStatus(status.rejected));
         dispatch(setErrorMessage(error.message));
       }
     };
